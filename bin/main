@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
-puts 'Hello!'
+GAME_STATE = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
+]
+
+def render_game(matrix)
+  result = matrix.each_with_index.map do |row, index|
+    "#{index + 1}  #{row}"
+  end
+end
+
+puts render_game(GAME_STATE)
+
+puts # New Line
+
+puts "Select the row and item index to change"
+puts "Example: 1.2, first row, second item"
+print ":"
+row_item = gets.chomp
+
+puts "Do you want #{row_item} to be X or O?"
+row_item_value = gets.chomp
+
+puts "Changing #{row_item} to #{row_item_value}"

@@ -29,5 +29,10 @@ module TicTacToe
       # Check Horizontally If All Items Are The Same, Ex: [0,0,0]
       game_matrix.select { |item| item.uniq.count == 1 }
     end
+
+    def new_game
+      @game_state =  Matrix.build(3, 3) {|row, col| '' } 
+    end
+
   end
 end

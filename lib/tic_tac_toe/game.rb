@@ -1,4 +1,4 @@
-require "matrix"
+require 'matrix'
 
 module TicTacToe
   class Game
@@ -17,7 +17,7 @@ module TicTacToe
       game4 = [
         [1, 0, 0],
         [0, 0, 1],
-        [1, 0, 1],
+        [1, 0, 1]
       ]
       result4 = []
       (0..game4.size - 1).each_with_object(game4) do |index, matrix|

@@ -20,8 +20,11 @@ require_relative '../lib/tic_tac_toe/game.rb'
 interface = TicTacToe::Interface.new
 puts interface.new_game
 game = TicTacToe::Game.new
+
 player_x = interface.select_option
 game.update_board(player_x, 'X')
+
 player_o = interface.select_option
 game.update_board(player_o, 'O')
-puts game.board
+
+game.board.each { |row| p row }

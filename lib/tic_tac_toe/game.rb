@@ -2,6 +2,12 @@ require 'matrix'
 
 module TicTacToe
   class Game
+    attr_accessor :board
+
+    def initialize
+      @board = Matrix.build(3, 3) { |_row, _col| '' }.to_a
+    end
+
     def winner(game_matrix)
       # Starting From First Row & First Item
       Matrix.rows(game_matrix).each(:diagonal).to_a
@@ -30,9 +36,8 @@ module TicTacToe
       game_matrix.select { |item| item.uniq.count == 1 }
     end
 
-    def new_game
-      @game_state =  Matrix.build(3, 3) {|row, col| '' } 
+    def update_board(selection, player)
+      board[selection.column][selection.row] = player
     end
-
   end
 end

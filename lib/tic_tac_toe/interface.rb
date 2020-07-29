@@ -10,6 +10,12 @@ three of their marks in a horizontal, vertical, or diagonal row is the winner.
 Player One will be 'X' and Player Two will be 'O')
     end
 
+    attr_reader :game_matrix
+
+    def initialize(game_matrix)
+      @game_matrix = game_matrix
+    end
+
     def select_option
       player_selection = Struct.new(:column, :row).new
 
@@ -34,13 +40,13 @@ Player One will be 'X' and Player Two will be 'O')
       player_selection
     end
 
-    def draw_board(matrix)
+    def draw_board
       puts
-      puts "#{matrix[0][0]} | #{matrix[0][1]} | #{matrix[0][2]}"
+      puts "#{game_matrix[0][0]} | #{game_matrix[0][1]} | #{game_matrix[0][2]}"
       puts "----------"
-      puts "#{matrix[1][0]} | #{matrix[1][1]} | #{matrix[1][2]}"
+      puts "#{game_matrix[1][0]} | #{game_matrix[1][1]} | #{game_matrix[1][2]}"
       puts "----------"
-      puts "#{matrix[2][0]} | #{matrix[2][1]} | #{matrix[2][2]}"
+      puts "#{game_matrix[2][0]} | #{game_matrix[2][1]} | #{game_matrix[2][2]}"
     end
 
 

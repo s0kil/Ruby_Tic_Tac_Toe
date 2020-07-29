@@ -34,6 +34,16 @@ Player One will be 'X' and Player Two will be 'O')
       player_selection
     end
 
+    def draw_board(matrix)
+      puts
+      puts "#{matrix[0][0]} | #{matrix[0][1]} | #{matrix[0][2]}"
+      puts "----------"
+      puts "#{matrix[1][0]} | #{matrix[1][1]} | #{matrix[1][2]}"
+      puts "----------"
+      puts "#{matrix[2][0]} | #{matrix[2][1]} | #{matrix[2][2]}"
+    end
+
+
     # def render_game(matrix)
     #   matrix.each_with_index.map do |row, index|
     #     "#{index + 1}  #{row}"

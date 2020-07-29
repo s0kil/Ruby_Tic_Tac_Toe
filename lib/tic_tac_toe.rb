@@ -13,15 +13,15 @@ module TicTacToe
 
     # Infinite Loop Until We Have A Winner
     until winner
+      interface.draw_board(game.board)
       puts "\nPlayer X, Select Your Move!"
       player_x = interface.select_option
       game.update_board(player_x, 'X')
 
+      interface.draw_board(game.board)
       puts "\nPlayer O, Select Your Move!"
       player_o = interface.select_option
       game.update_board(player_o, 'O')
-
-      game.board.each { |row| p row }
     end
   end
 end

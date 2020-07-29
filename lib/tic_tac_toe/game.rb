@@ -5,7 +5,7 @@ module TicTacToe
     attr_accessor :board
 
     def initialize
-      @board = Matrix.build(3, 3) { |_row, _col| '' }.to_a
+      @board = Matrix.build(3, 3) { |_row, _col| '-' }.to_a
     end
 
     def winner(game_matrix)

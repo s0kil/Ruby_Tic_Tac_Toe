@@ -13,15 +13,22 @@ Player One will be 'X' and Player Two will be 'O')
     def select_option
       player_selection = Struct.new(:column, :row).new
 
+      options = %w[First Second Third].freeze
+
       CLI::UI::Prompt.ask('What column would you like to select?') do |handler|
-        handler.option('1') { |selection| player_selection.column = selection.to_i }
-        handler.option('2') { |selection| player_selection.column = selection.to_i }
-        handler.option('3') { |selection| player_selection.column = selection.to_i }
+        options.map do |option|
+          handler.option(option) do |selected_option|
+            player_selection.column = options.index(selected_option)
+          end
+        end
       end
+
       CLI::UI::Prompt.ask('What row would you like to select?') do |handler|
-        handler.option('1') { |selection| player_selection.row = selection.to_i }
-        handler.option('2') { |selection| player_selection.row = selection.to_i }
-        handler.option('3') { |selection| player_selection.row = selection.to_i }
+        options.map do |option|
+          handler.option(option) do |selected_option|
+            player_selection.row = options.index(selected_option)
+          end
+        end
       end
 
       player_selection

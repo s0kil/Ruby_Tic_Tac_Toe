@@ -16,23 +16,33 @@ Player One will be 'X' and Player Two will be 'O')
       @game_matrix = game_matrix
     end
 
-    def select_option
+    # Checks If A Matrix Row Is Not Occupied (All Items Equal To 'O' Or 'X')
+    # Example: [X, X, '-'], All Items Are Not Equal To Character '-', So The Row Is Available
+    def available_game_board_rows
+      game_matrix.map do |row|
+        row.any? { |symbol| symbol == '-' }
+      end
+    end
+
+    def select_option(player_symbol)
       player_selection = Struct.new(:column, :row).new
 
       options = %w[First Second Third].freeze
 
-      CLI::UI::Prompt.ask('What column would you like to select?') do |handler|
-        options.map do |option|
-          handler.option(option) do |selected_option|
-            player_selection.column = options.index(selected_option)
+      CLI::UI::Prompt.ask("#{player_symbol}: What row would you like to select?") do |handler|
+        available_game_board_rows.map.with_index do |move_available, index|
+          if move_available == true
+            handler.option(options[index]) do |selected_option|
+              player_selection.row = options.index(selected_option)
+            end
           end
         end
       end
 
-      CLI::UI::Prompt.ask('What row would you like to select?') do |handler|
+      CLI::UI::Prompt.ask("#{player_symbol}: What column would you like to select?") do |handler|
         options.map do |option|
           handler.option(option) do |selected_option|
-            player_selection.row = options.index(selected_option)
+            player_selection.column = options.index(selected_option)
           end
         end
       end
@@ -43,12 +53,11 @@ Player One will be 'X' and Player Two will be 'O')
     def draw_board
       puts
       puts "#{game_matrix[0][0]} | #{game_matrix[0][1]} | #{game_matrix[0][2]}"
-      puts "----------"
+      puts '----------'
       puts "#{game_matrix[1][0]} | #{game_matrix[1][1]} | #{game_matrix[1][2]}"
-      puts "----------"
+      puts '----------'
       puts "#{game_matrix[2][0]} | #{game_matrix[2][1]} | #{game_matrix[2][2]}"
     end
-
 
     # def render_game(matrix)
     #   matrix.each_with_index.map do |row, index|

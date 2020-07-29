@@ -62,7 +62,7 @@ module TicTacToe
     end
 
     def update_board(selection, player)
-      board[selection.column][selection.row] = player
+      board[selection.row][selection.column] = player
     end
   end
 end

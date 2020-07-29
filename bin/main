@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require_relative '../lib/tic_tac_toe/interface.rb'
-require_relative '../lib/tic_tac_toe/game.rb'
+
+require_relative '../lib/tic_tac_toe'
 
 # puts 'Select the row and item index to change'
 # puts 'Example: 1.2, first row, second item'
@@ -17,16 +17,4 @@ require_relative '../lib/tic_tac_toe/game.rb'
 ## A method to display who was the winner.
 ## Ask the players if they want to play the game again.
 
-interface = TicTacToe::Interface.new
-puts interface.new_game
-game = TicTacToe::Game.new
-
-puts "\nPlayer X, Select Your Move!"
-player_x = interface.select_option
-game.update_board(player_x, 'X')
-
-puts "\nPlayer O, Select Your Move!"
-player_o = interface.select_option
-game.update_board(player_o, 'O')
-
-game.board.each { |row| p row }
+TicTacToe.start_game

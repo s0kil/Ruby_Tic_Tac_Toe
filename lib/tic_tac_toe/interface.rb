@@ -53,9 +53,9 @@ Player One will be 'X' and Player Two will be 'O')
     def draw_board
       puts
       puts "#{game_matrix[0][0]} | #{game_matrix[0][1]} | #{game_matrix[0][2]}"
-      puts '----------'
+      puts '---------'
       puts "#{game_matrix[1][0]} | #{game_matrix[1][1]} | #{game_matrix[1][2]}"
-      puts '----------'
+      puts '---------'
       puts "#{game_matrix[2][0]} | #{game_matrix[2][1]} | #{game_matrix[2][2]}"
     end
 

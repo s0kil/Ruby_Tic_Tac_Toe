@@ -68,13 +68,5 @@ Player One will be 'X' and Player Two will be 'O')
       puts '---------'
       puts "#{game_matrix[2][0]} | #{game_matrix[2][1]} | #{game_matrix[2][2]}"
     end
-
-    # def render_game(matrix)
-    #   matrix.each_with_index.map do |row, index|
-    #     "#{index + 1}  #{row}"
-    #   end
-    # end
-
-    # puts render_game(game_state)
   end
 end

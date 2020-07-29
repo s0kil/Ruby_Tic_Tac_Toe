@@ -10,10 +10,14 @@ module TicTacToe
 
     def winner(game_matrix)
       # Starting From First Row & First Item
-      Matrix.rows(game_matrix).each(:diagonal).to_a
+      Matrix.rows(
+        game_matrix
+      ).each(:diagonal).to_a
 
       # Starting From First Row, Last Item
-      Matrix.rows(game_matrix).each(:diagonal).to_a
+      Matrix.rows(
+        game_matrix.map(&:reverse)
+      ).each(:diagonal).to_a
 
       # First Item Of All Rows
       game_matrix.transpose.fetch(0)

@@ -13,6 +13,8 @@ module TicTacToe
     interface.new_game
     interface.start_game_loop do
       interface.draw_board
+      interface.handle_keypress
+      # TODO: Check For Winnner
     end
 
     # TODO: Game Logic To Check For Winner

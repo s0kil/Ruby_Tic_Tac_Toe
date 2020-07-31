@@ -49,7 +49,8 @@ Player One will be 'X' and Player Two will be 'O'
       end
 
       def draw_board
-        window.setpos(8, 0) # TODO: How To Render In Free Space (After Welcome Message)? Versus Gusssing The Correct Hardcoded Value
+        # TODO: How To Render In Free Space (After Welcome Message)? Versus Gusssing The Correct Hardcoded Value
+        window.setpos(8, 0)
 
         window << "#{game_board[0][0]} | #{game_board[0][1]} | #{game_board[0][2]}\n"
         window << "---------\n"

@@ -9,3 +9,5 @@
 
 # Ruby Go To Definition Helper File
 TAGS
+# Ignore VS Code Config
+.vscode

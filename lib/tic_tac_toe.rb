@@ -14,9 +14,6 @@ module TicTacToe
 
     interface.new_game
     interface.game_loop do
-      interface.draw_board
-      interface.handle_key_press
-
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
 
@@ -37,6 +34,9 @@ module TicTacToe
         @player_selection.row = nil
         @player_selection.column = nil
       end
+
+      interface.draw_board(@current_player)
+      interface.handle_key_press
 
       # TODO: Game Logic To Check For Winner
     end

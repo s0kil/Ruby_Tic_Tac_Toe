@@ -45,7 +45,7 @@ module TicTacToe
       game_matrix.transpose.fetch(0)
 
       # TODO: Refactor/Simplify
-      # Check Verically If All Items Are The Same,
+      # Check Vertically If All Column Items Are The Same,
       # Ex: [0,1,1],[0,1,1],[0,1,1]
       game4 = [
         [1, 0, 0],

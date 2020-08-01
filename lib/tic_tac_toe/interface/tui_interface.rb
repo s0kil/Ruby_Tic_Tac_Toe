@@ -30,10 +30,10 @@ module TicTacToe
         Curses.cbreak # Ctrl+C Exits The Program
 
         # The Number Is The Color Pair Identifier
-        @color_black_red = 1
+        @color_pair_one = 1
         # Setup Colors That Will Be Used Later
         # Color Definitions: https://github.com/ruby/curses/blob/master/ext/curses/curses.c#L5216-L5263
-        Curses.init_pair(@color_black_red, Curses::COLOR_BLACK, Curses::COLOR_RED)
+        Curses.init_pair(@color_pair_one, Curses::COLOR_BLACK, Curses::COLOR_GREEN)
 
         @window = Curses::Window.new(0, 0, WINDOW_MARGIN, WINDOW_MARGIN) # Full Screen, With Some Margin
 
@@ -63,17 +63,33 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         @window.setpos(0, 0)
       end
 
-      def draw_board
-        # TODO: How To Render In Free Space (After Welcome Message)? Versus Manually Hardcoding The Value
+      def draw_board(player)
         @window.setpos(10, 0)
 
-        @window.attron(Curses.color_pair(@color_black_red)) do
-          @window.addstr("#{@game_board[0][0]} | #{@game_board[0][1]} | #{@game_board[0][2]}\n")
-          @window.addstr("---------\n")
-          @window.addstr("#{@game_board[1][0]} | #{@game_board[1][1]} | #{@game_board[1][2]}\n")
-          @window.addstr("---------\n")
-          @window.addstr("#{@game_board[2][0]} | #{@game_board[2][1]} | #{@game_board[2][2]}\n")
+        # Replace The Default Character `-` With A Colored Space Placeholder
+        colored_placeholder = lambda do |string|
+          if string == '-'
+            @window.attron(Curses.color_pair(@color_pair_one)) do
+              @window.addstr(' ')
+            end
+          else
+            @window.addstr(string)
+          end
         end
+
+        @game_board.each.with_index do |row, row_index|
+          row.each_index do |column_index|
+            colored_placeholder.call((@game_board[row_index][column_index]).to_s)
+
+            # Add Column Separator, Unless Last Column
+            @window.addstr(' | ') unless column_index == (row.length - 1)
+          end
+
+          # Add Row Separator, Unless Last Row
+          @window.addstr("\n---------\n") unless row_index == (@game_board.length - 1)
+        end
+
+        @window.addstr("\n\nPlayer #{player}'s turn\n")
       end
 
       def game_loop

@@ -30,6 +30,11 @@ module TicTacToe
         Curses.noecho # Do Not Print Pressed Keys To The Screen
         Curses.cbreak # Ctrl+C Exits The Program
 
+        # The Number Is The Color Pair Identifier
+        @color_red_black = 1
+        # Setup Colors That Will Be Used In This Program
+        Curses.init_pair(@color_red_black, Curses::COLOR_RED, Curses::COLOR_BLACK)
+
         @window = Curses::Window.new(0, 0, WINDOW_MARGIN, WINDOW_MARGIN) # Full Screen, With Some Margin
 
         window.nodelay = true # Do Not Block Waiting For Keyboard Input With `getch`
@@ -61,11 +66,13 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         # TODO: How To Render In Free Space (After Welcome Message)? Versus Manually Hardcoding The Value
         window.setpos(10, 0)
 
-        window.addstr("#{game_board[0][0]} | #{game_board[0][1]} | #{game_board[0][2]}\n")
-        window.addstr("---------\n")
-        window.addstr("#{game_board[1][0]} | #{game_board[1][1]} | #{game_board[1][2]}\n")
-        window.addstr("---------\n")
-        window.addstr("#{game_board[2][0]} | #{game_board[2][1]} | #{game_board[2][2]}\n")
+        window.attron(Curses.color_pair(@color_red_black)) do
+          window.addstr("#{game_board[0][0]} | #{game_board[0][1]} | #{game_board[0][2]}\n")
+          window.addstr("---------\n")
+          window.addstr("#{game_board[1][0]} | #{game_board[1][1]} | #{game_board[1][2]}\n")
+          window.addstr("---------\n")
+          window.addstr("#{game_board[2][0]} | #{game_board[2][1]} | #{game_board[2][2]}\n")
+        end
       end
 
       def start_game_loop
@@ -85,6 +92,9 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       end
 
       def handle_key_press
+        # Make Sure Cursor Starts Inside The Game Board On First Render
+        cursor_coordinates[:y] = 10 if cursor_coordinates[:y] < 10
+
         # We Are Restoring Cursor Position Set By The User On The Previous Game Loop Cycle
         window.setpos(
           cursor_coordinates[:y],
@@ -93,18 +103,21 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
         key_press = window.getch
 
-        # TODO: Define The Amount Cursor Should Move On Each Key Press,
+        # Define The Amount Cursor Should Move On Each Key Press,
         # Example: One Game Board Row Is, `- | - | -`,
-        # It Would Take Four Steps To Get To Each (X, O) Item In The Row
+        # It Would Take Four Steps To Get To Each `-` Character In The Row
+        row_cursor_gap = 2
+        column_cursor_gap = 4
+
         case key_press
         when Curses::Key::UP
-          cursor_coordinates[:y] = cursor_coordinates[:y] - 1
+          cursor_coordinates[:y] = cursor_coordinates[:y] - row_cursor_gap
         when Curses::Key::DOWN
-          cursor_coordinates[:y] = cursor_coordinates[:y] + 1
+          cursor_coordinates[:y] = cursor_coordinates[:y] + row_cursor_gap
         when Curses::Key::LEFT
-          cursor_coordinates[:x] = cursor_coordinates[:x] - 1
+          cursor_coordinates[:x] = cursor_coordinates[:x] - column_cursor_gap
         when Curses::Key::RIGHT
-          cursor_coordinates[:x] = cursor_coordinates[:x] + 1
+          cursor_coordinates[:x] = cursor_coordinates[:x] + column_cursor_gap
         end
       end
     end

@@ -92,8 +92,13 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       end
 
       def handle_key_press
-        # Make Sure Cursor Starts Inside The Game Board On First Render
-        cursor_coordinates[:y] = 10 if cursor_coordinates[:y] < 10
+        # Make Sure Cursor Starts Inside The Game Board On First Render,
+        # And Prevent Cursor From Escaping Game Board
+        cursor_coordinates[:y] = 10 if cursor_coordinates[:y] <= 10
+        cursor_coordinates[:y] = 14 if cursor_coordinates[:y] >= 14
+
+        cursor_coordinates[:x] = 0 if cursor_coordinates[:x] <= 0
+        cursor_coordinates[:x] = 8 if cursor_coordinates[:x] >= 8
 
         # We Are Restoring Cursor Position Set By The User On The Previous Game Loop Cycle
         window.setpos(

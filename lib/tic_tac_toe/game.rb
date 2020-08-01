@@ -7,7 +7,7 @@ module TicTacToe
       @player_selection = player_selection
     end
 
-    def winner(game_matrix)
+    def winner
       # Diagonally, Starting From [First Row][First Item]
       # [0 _ _]
       # [_ 0 _]
@@ -38,26 +38,19 @@ module TicTacToe
       # [0 0 0]
       game_matrix.select { |item| item.uniq.count == 1 }
 
-      # First Item Of All Rows
+      # Vertically, All Items Are The Same
       # [0 _ _]
       # [0 _ _]
       # [0 _ _]
-      game_matrix.transpose.fetch(0)
-
-      # TODO: Refactor/Simplify
-      # Check Vertically If All Column Items Are The Same,
-      # Ex: [0,1,1],[0,1,1],[0,1,1]
-      game4 = [
-        [1, 0, 0],
-        [0, 0, 1],
-        [1, 0, 1]
-      ]
-      result4 = []
-      (0..game4.size - 1).each_with_object(game4) do |index, matrix|
-        single_columns = matrix.map { |row| row[index, 1] } # row[index, length of one]
-        result4 << single_columns.transpose.fetch(0)
-      end
-      result4.select! { |item| item.uniq.count == 1 }
+      #
+      # [_ 0 _]
+      # [_ 0 _]
+      # [_ 0 _]
+      #
+      # [_ _ 0]
+      # [_ _ 0]
+      # [_ _ 0]
+      game_matrix.transpose.select { |item| item.uniq.count == 1 }
     end
 
     def update_board(player)

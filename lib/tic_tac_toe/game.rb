@@ -63,5 +63,9 @@ module TicTacToe
     def update_board(player)
       @game_board[@player_selection.row][@player_selection.column] = player
     end
+
+    def player_selection_available?
+      @game_board[@player_selection.row][@player_selection.column] == '-'
+    end
   end
 end

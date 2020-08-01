@@ -17,15 +17,15 @@ module TicTacToe
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
 
-      # Update Game Board If Player Selected An Item
-      # TODO: Check If Selection Is Available, So We Do Not Override Another Players Selection
-      game.update_board(@current_player) if @player_selection.row && @player_selection.column
-
-      # Switch Players
+      # Update Game Board Item And Switch Player If Player Selected An Item And The Item Is Available
       if @player_selection.row &&
          @player_selection.column &&
-         @current_player.empty? == false
+         @current_player.empty? == false &&
+         game.player_selection_available?
 
+        game.update_board(@current_player)
+
+        # Switch Players
         new_player =
           game_characters.reject { |game_character| game_character == @current_player }.first
 

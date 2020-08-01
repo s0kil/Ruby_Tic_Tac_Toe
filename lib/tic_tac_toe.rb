@@ -17,7 +17,9 @@ module TicTacToe
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
 
-      # Update Game Board Item And Switch Player If Player Selected An Item And The Item Is Available
+      # Update Game Board Item And Switch Player,
+      # If Player Selected An Item,
+      # And The Item Is Available
       if @player_selection.row &&
          @player_selection.column &&
          @current_player.empty? == false &&

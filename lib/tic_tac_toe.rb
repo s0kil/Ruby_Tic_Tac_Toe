@@ -21,6 +21,7 @@ module TicTacToe
       # TODO: Check If Selection Is Available, So We Do Not Override Another Players Selection
       game.update_board(@current_player) if @player_selection.row && @player_selection.column
 
+      # Switch Players
       if @player_selection.row &&
          @player_selection.column &&
          @current_player.empty? == false

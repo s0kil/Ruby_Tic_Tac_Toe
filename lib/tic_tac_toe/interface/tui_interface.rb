@@ -18,10 +18,9 @@ module TicTacToe
     class TextualInterface
       WINDOW_MARGIN = 2
 
-      attr_accessor :game_board, :window, :cursor_coordinates
-
-      def initialize(game_board)
+      def initialize(game_board, player_selection)
         @game_board = game_board
+        @player_selection = player_selection
 
         Curses.init_screen
         Curses.start_color
@@ -38,13 +37,13 @@ module TicTacToe
 
         @window = Curses::Window.new(0, 0, WINDOW_MARGIN, WINDOW_MARGIN) # Full Screen, With Some Margin
 
-        window.nodelay = true # Do Not Block Waiting For Keyboard Input
-        window.keypad = true # Allow User To Move Around With The Keyboard (Up, Down, Left, Right)
-        window.refresh # Refreshes The Screen
+        @window.nodelay = true # Do Not Block Waiting For Keyboard Input
+        @window.keypad = true # Allow User To Move Around With The Keyboard (Up, Down, Left, Right)
+        @window.refresh # Refreshes The Screen
 
         @cursor_coordinates = {
-          y: window.cury,
-          x: window.curx
+          y: @window.cury,
+          x: @window.curx
         }
       end
 
@@ -55,32 +54,32 @@ Tic-tac-toe is a game for two players, X and O, who take turns marking the space
 The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
 )
 
-        window.addstr(Strings.wrap(welcome_message, 50))
+        @window.addstr(Strings.wrap(welcome_message, 50))
 
         # Set Cursor To Bottom Of The Terminal, https://stackoverflow.com/a/54736503
-        window.setpos(window.maxy - WINDOW_MARGIN - 2, 0)
-        window.addstr("- Press space bar to mark an empty space\n")
-        window.addstr("- Exit game with Ctrl+C\n")
-        window.setpos(0, 0)
+        @window.setpos(@window.maxy - WINDOW_MARGIN - 2, 0)
+        @window.addstr("- Press space bar to mark an empty space\n")
+        @window.addstr("- Exit game with Ctrl+C\n")
+        @window.setpos(0, 0)
       end
 
       def draw_board
         # TODO: How To Render In Free Space (After Welcome Message)? Versus Manually Hardcoding The Value
-        window.setpos(10, 0)
+        @window.setpos(10, 0)
 
-        window.attron(Curses.color_pair(@color_black_red)) do
-          window.addstr("#{game_board[0][0]} | #{game_board[0][1]} | #{game_board[0][2]}\n")
-          window.addstr("---------\n")
-          window.addstr("#{game_board[1][0]} | #{game_board[1][1]} | #{game_board[1][2]}\n")
-          window.addstr("---------\n")
-          window.addstr("#{game_board[2][0]} | #{game_board[2][1]} | #{game_board[2][2]}\n")
+        @window.attron(Curses.color_pair(@color_black_red)) do
+          @window.addstr("#{@game_board[0][0]} | #{@game_board[0][1]} | #{@game_board[0][2]}\n")
+          @window.addstr("---------\n")
+          @window.addstr("#{@game_board[1][0]} | #{@game_board[1][1]} | #{@game_board[1][2]}\n")
+          @window.addstr("---------\n")
+          @window.addstr("#{@game_board[2][0]} | #{@game_board[2][1]} | #{@game_board[2][2]}\n")
         end
       end
 
       def start_game_loop
         loop do
           yield # Assuming Block Givin
-          window.refresh
+          @window.refresh
 
           # Slow Down Event Loop,
           # So Our Program Is Not CPU Intensive
@@ -100,18 +99,18 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       def handle_key_press
         # Make Sure Cursor Starts Inside The Game Board On First Render,
         # And Prevent Cursor From Escaping Game Board
-        cursor_coordinates[:y] = 10 if cursor_coordinates[:y] <= 10 # Up
-        cursor_coordinates[:y] = 14 if cursor_coordinates[:y] >= 14 # Down
-        cursor_coordinates[:x] = 0 if cursor_coordinates[:x] <= 0 # Left
-        cursor_coordinates[:x] = 8 if cursor_coordinates[:x] >= 8 # Right
+        @cursor_coordinates[:y] = 10 if @cursor_coordinates[:y] <= 10 # Up
+        @cursor_coordinates[:y] = 14 if @cursor_coordinates[:y] >= 14 # Down
+        @cursor_coordinates[:x] = 0 if @cursor_coordinates[:x] <= 0 # Left
+        @cursor_coordinates[:x] = 8 if @cursor_coordinates[:x] >= 8 # Right
 
         # We Are Restoring Cursor Position Set On The Previous Game Loop Cycle
-        window.setpos(
-          cursor_coordinates[:y],
-          cursor_coordinates[:x]
+        @window.setpos(
+          @cursor_coordinates[:y],
+          @cursor_coordinates[:x]
         )
 
-        key_press = window.getch
+        key_press = @window.getch
 
         # Define Amount The Cursor Should Move On Each Key Press,
         # Example: One Game Board Row Is, `- | - | -`,
@@ -121,13 +120,13 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
         case key_press
         when Curses::Key::UP
-          cursor_coordinates[:y] = cursor_coordinates[:y] - row_cursor_gap
+          @cursor_coordinates[:y] = @cursor_coordinates[:y] - row_cursor_gap
         when Curses::Key::DOWN
-          cursor_coordinates[:y] = cursor_coordinates[:y] + row_cursor_gap
+          @cursor_coordinates[:y] = @cursor_coordinates[:y] + row_cursor_gap
         when Curses::Key::LEFT
-          cursor_coordinates[:x] = cursor_coordinates[:x] - column_cursor_gap
+          @cursor_coordinates[:x] = @cursor_coordinates[:x] - column_cursor_gap
         when Curses::Key::RIGHT
-          cursor_coordinates[:x] = cursor_coordinates[:x] + column_cursor_gap
+          @cursor_coordinates[:x] = @cursor_coordinates[:x] + column_cursor_gap
         when ' ' # Space Bar, https://stackoverflow.com/a/13434381
           # Simple Solution To Convert Row And Column Coordinates To Game Board Matrix Indices
           # WARNING: Will Break If Game Board Position Changes
@@ -152,7 +151,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
             }
 
           row =
-            row_to_index[cursor_coordinates[:y]]
+            row_to_index[@cursor_coordinates[:y]]
 
           column_to_index =
             {
@@ -162,10 +161,10 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
             }
 
           column =
-            column_to_index[cursor_coordinates[:x]]
+            column_to_index[@cursor_coordinates[:x]]
 
-          # Update Game Board
-          game_board[row][column] = '+'
+          @player_selection.row = row
+          @player_selection.column = column
         end
       end
     end

@@ -3,10 +3,11 @@ require_relative 'tic_tac_toe/game.rb'
 
 module TicTacToe
   @game_board = Matrix.build(3, 3) { |_row, _col| '-' }.to_a
+  @player_selection = Struct.new(:column, :row).new
 
   def self.start_game(
-    _game = TicTacToe::Game.new(@game_board),
-    interface = TicTacToe::Interface::TextualInterface.new(@game_board)
+    game = TicTacToe::Game.new(@game_board, @player_selection),
+    interface = TicTacToe::Interface::TextualInterface.new(@game_board, @player_selection)
   )
     # players = %w[X O].freeze
 
@@ -14,6 +15,9 @@ module TicTacToe
     interface.start_game_loop do
       interface.draw_board
       interface.handle_key_press
+
+      # Update Game Board If Player Selected An Item
+      game.update_board('+') if @player_selection.row && @player_selection.column
 
       # TODO: Check For Winner
     end

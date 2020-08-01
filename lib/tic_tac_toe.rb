@@ -23,7 +23,7 @@ module TicTacToe
       if @player_selection.row &&
          @player_selection.column &&
          @current_player.empty? == false &&
-         game.player_selection_available?
+         game.player_selection_available? == true
 
         game.update_board(@current_player)
 

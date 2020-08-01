@@ -27,12 +27,13 @@ module TicTacToe
         Curses.use_default_colors # Use User Defined Terminal Colors
         Curses.curs_set(2) # Set Curser Very Visible
         Curses.noecho # Do Not Print Pressed Keys To The Screen
+        Curses.cbreak # Ctrl+C Exits The Program
 
         @window = Curses::Window.new(0, 0, WINDOW_MARGIN, WINDOW_MARGIN) # Full Screen, With Some Margin
 
         window.nodelay = true # Do Not Block Waiting For Keyboard Input With `getch`
         window.keypad = true # Allow User To Move Around With The Keyboard (Up, Down, Left, Right)
-        window.refresh
+        window.refresh # Refreshes The Screen
       end
 
       def new_game

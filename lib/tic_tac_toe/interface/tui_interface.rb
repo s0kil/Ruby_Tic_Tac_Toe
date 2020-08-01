@@ -85,7 +85,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       end
 
       def handle_key_press
-        # We Are Restoring Cursor Position Set By The User
+        # We Are Restoring Cursor Position Set By The User On The Previous Game Loop Cycle
         window.setpos(
           cursor_coordinates[:y],
           cursor_coordinates[:x]
@@ -93,6 +93,9 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
         key_press = window.getch
 
+        # TODO: Define The Amount Cursor Should Move On Each Key Press,
+        # Example: One Game Board Row Is, `- | - | -`,
+        # It Would Take Four Steps To Get To Each (X, O) Item In The Row
         case key_press
         when Curses::Key::UP
           cursor_coordinates[:y] = cursor_coordinates[:y] - 1

@@ -16,7 +16,7 @@ module TicTacToe
   module Interface
     # TUI
     class TextualInterface
-      WINDOW_MARGIN = 4
+      WINDOW_MARGIN = 2
 
       def initialize(game_board, player_selection)
         @game_board = game_board
@@ -35,7 +35,7 @@ module TicTacToe
         # Color Definitions: https://github.com/ruby/curses/blob/master/ext/curses/curses.c#L5216-L5263
         Curses.init_pair(@color_pair_one, Curses::COLOR_BLACK, Curses::COLOR_GREEN)
 
-        @window = Curses::Window.new(0, 0, WINDOW_MARGIN, WINDOW_MARGIN) # Full Screen, With Some Margin
+        @window = Curses::Window.new(0, 0, (WINDOW_MARGIN / 2), WINDOW_MARGIN) # Full Screen, With Some Margin
 
         @window.nodelay = true # Do Not Block Waiting For Keyboard Input
         @window.keypad = true # Allow User To Move Around With The Keyboard (Up, Down, Left, Right)

@@ -25,7 +25,7 @@ module TicTacToe
         Curses.init_screen
         Curses.start_color
         Curses.use_default_colors # Use User Defined Terminal Colors
-        Curses.curs_set(2) # Set Curser Very Visible
+        Curses.curs_set(2) # Set Cursor Very Visible
         Curses.noecho # Do Not Print Pressed Keys To The Screen
         Curses.cbreak # Ctrl+C Exits The Program
 

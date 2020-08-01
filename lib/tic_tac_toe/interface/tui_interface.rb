@@ -58,7 +58,8 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
         # Set Cursor To Bottom Of The Terminal, https://stackoverflow.com/a/54736503
         @window.setpos(@window.maxy - WINDOW_MARGIN - 2, 0)
-        @window.addstr("- Press space bar to mark an empty space\n")
+        @window.addstr("+ Use navigation/arrow keys to move around\n")
+        @window.addstr("+ Press space bar to mark an empty space\n")
         @window.addstr("- Exit game with Ctrl+C\n")
         @window.setpos(0, 0)
       end

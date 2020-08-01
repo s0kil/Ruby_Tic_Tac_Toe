@@ -128,8 +128,44 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
           cursor_coordinates[:x] = cursor_coordinates[:x] - column_cursor_gap
         when Curses::Key::RIGHT
           cursor_coordinates[:x] = cursor_coordinates[:x] + column_cursor_gap
-        when ' ' # Space Bar
-          # game_board[0][0] = '+'
+        when ' ' # Space Bar, https://stackoverflow.com/a/13434381
+          # Ugly Solution To Convert Row And Column Coordinates To Game Board Matrix Indices
+          # WARNING: Will Break If Game Board Position Changes
+          # Example
+          # [
+          #   [10 0] [10 4] [10 8]
+          #   [12 0] [12 4] [12 8]
+          #   [14 0] [14 4] [14 8]
+          # ]
+          # Turns Into
+          # [
+          #   [0 0] [0 1] [0 2]
+          #   [1 0] [1 1] [1 2]
+          #   [2 0] [2 1] [2 2]
+          # ]
+
+          row_to_index =
+            case cursor_coordinates[:y]
+            when 10
+              0
+            when 12
+              1
+            when 14
+              2
+            end
+
+          column_to_index =
+            case cursor_coordinates[:x]
+            when 0
+              0
+            when 4
+              1
+            when 8
+              2
+            end
+
+          # Update Game Board
+          game_board[row_to_index][column_to_index] = '+'
         end
       end
     end

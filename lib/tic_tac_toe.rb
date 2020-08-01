@@ -13,7 +13,9 @@ module TicTacToe
     interface.new_game
     interface.start_game_loop do
       interface.draw_board
-      interface.handle_keypress
+      interface.handle_key_press
+
+      # sleep(1) # Debug By Slowing Down Event Loop
       # TODO: Check For Winnner
     end
 

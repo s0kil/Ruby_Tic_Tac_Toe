@@ -76,7 +76,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         end
       end
 
-      def start_game_loop
+      def game_loop
         loop do
           yield # Assuming Block Givin
           @window.refresh

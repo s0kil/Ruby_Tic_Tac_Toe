@@ -16,7 +16,7 @@ module TicTacToe
   module Interface
     # TUI
     class TextualInterface
-      WINDOW_MARGIN = 2
+      WINDOW_MARGIN = 4
 
       def initialize(game_board, player_selection)
         @game_board = game_board

@@ -15,8 +15,7 @@ module TicTacToe
       interface.draw_board
       interface.handle_key_press
 
-      # sleep(1) # Debug By Slowing Down Event Loop
-      # TODO: Check For Winnner
+      # TODO: Check For Winner
     end
 
     # TODO: Game Logic To Check For Winner

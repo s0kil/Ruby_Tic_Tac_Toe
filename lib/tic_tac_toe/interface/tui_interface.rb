@@ -59,8 +59,8 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
         # Set Cursor To Bottom Of The Terminal, https://stackoverflow.com/a/54736503
         window.setpos(window.maxy - WINDOW_MARGIN - 2, 0)
-        window.addstr("- Press Space Bar To Mark An Empty Space\n")
-        window.addstr("- Exit Game With Ctrl+C\n")
+        window.addstr("- Press space bar to mark an empty space\n")
+        window.addstr("- Exit game with Ctrl+C\n")
         window.setpos(0, 0)
       end
 
@@ -81,6 +81,10 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         loop do
           yield # Assuming Block Givin
           window.refresh
+
+          # Slow Down Event Loop,
+          # So Our Program Is Not CPU Intensive
+          sleep(0.01)
         end
       rescue Interrupt => _e
         # Handling Ctrl+C, No Operation
@@ -90,7 +94,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         Curses.close_screen
 
         # Exit Message
-        puts 'Thanks For Playing Tic Tac Toe, Goodbye!'
+        puts 'Thanks for playing Tic Tac Toe, Goodbye!'
       end
 
       def handle_key_press
@@ -111,7 +115,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
         # Define Amount The Cursor Should Move On Each Key Press,
         # Example: One Game Board Row Is, `- | - | -`,
-        # It Would Take Four Steps To Get To Each `-` Character In The Row
+        # It Takes Four Steps To Get To Each `-` Character In The Row
         row_cursor_gap = 2
         column_cursor_gap = 4
 
@@ -124,6 +128,8 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
           cursor_coordinates[:x] = cursor_coordinates[:x] - column_cursor_gap
         when Curses::Key::RIGHT
           cursor_coordinates[:x] = cursor_coordinates[:x] + column_cursor_gap
+        when ' ' # Space Bar
+          # game_board[0][0] = '+'
         end
       end
     end

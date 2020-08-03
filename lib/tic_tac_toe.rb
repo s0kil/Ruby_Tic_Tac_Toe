@@ -13,6 +13,9 @@ module TicTacToe
     game_characters = %w[X O].freeze
 
     interface.new_game
+
+    winner = false
+
     interface.game_loop do
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
@@ -27,6 +30,11 @@ module TicTacToe
 
         game.update_board(@current_player)
 
+        if game.winner?
+          winner = true
+          interface.winner_message(@current_player)
+        end
+
         # Switch Players
         new_player =
           game_characters.reject { |game_character| game_character == @current_player }.first
@@ -38,8 +46,10 @@ module TicTacToe
         @player_selection.column = nil
       end
 
-      interface.draw_board(@current_player)
-      interface.handle_key_press
+      unless winner
+        interface.draw_board(@current_player)
+        interface.handle_key_press
+      end
 
       # TODO: Game Logic To Check For Winner
     end

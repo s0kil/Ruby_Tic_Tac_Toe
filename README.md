@@ -8,7 +8,7 @@ In order to win the game, a player must place three of their marks in a horizont
 
 The following example game is won by the first player, X:
 
-![gif](https://im7.ezgif.com/tmp/ezgif-7-b9d45a96f922.gif)
+![gif](demo-gif.gif)
 
 To exit the game, just press CTRL+C
 

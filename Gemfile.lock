@@ -34,7 +34,7 @@ DEPENDENCIES
   cli-ui (~> 1.3)
   curses (~> 1.3)
   rubocop (~> 0.81)
-  strings (~> 0.1.8)
+  strings (~> 0.1)
 
 BUNDLED WITH
    2.1.4

@@ -32,6 +32,7 @@ module TicTacToe
 
         if game.winner?
           winner = true
+          interface.draw_board(@current_player) # We Draw The Last Player Move
           interface.winner_message(@current_player)
         end
 
@@ -50,8 +51,6 @@ module TicTacToe
         interface.draw_board(@current_player)
         interface.handle_key_press
       end
-
-      # TODO: Game Logic To Check For Winner
     end
   end
 end

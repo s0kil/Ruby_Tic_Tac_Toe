@@ -1,10 +1,58 @@
-# RubyTicTacToe
+# Ruby - Tic Tac Toe
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/Ruby_Tic_Tac_Toe`. To experiment with that code, run `bin/console` for an interactive prompt.
+> In this project, it was build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.
 
-TODO: Delete this and the text above, and describe your gem
+# Instructions
 
-## Installation
+> In order to win the game, a player must place three of their marks in a horizontal, vertical, or diagonal row.
+
+> The following example game is won by the first player, X:
+
+# add the gif with the gameplay here.
+
+> To exit the game, just press CTRL+C
+## Built With
+
+- Ruby.
+
+## Live Demo
+
+[Live Demo Link](https://repl.it/@danielsokil/RubyTicTacToe-2#README.md)
+
+## Authors
+
+👤 **Daniel Sokil**
+
+- [@Github](https://github.com/s0kil?)
+- [Linkedin](https://linkedin.com/in/daniel-sokil/)
+
+👤 **Carlos Veiga**
+
+- [Github](https://github.com/wrakc)
+- [Twitter](https://twitter.com/carlosveig)
+- [Linkedin](https://linkedin.com/chveiga)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Microverse for the opportunity.
+- [Curses](https://github.com/piotrmurach/strings) library.
+- [Strings](https://github.com/ruby/curses) library.
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.
+
+<!-- ## Installation
 
 Add this line to your application's Gemfile:
 
@@ -37,4 +85,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT). -->

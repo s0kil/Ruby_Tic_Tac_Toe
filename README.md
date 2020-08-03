@@ -45,9 +45,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Microverse for the opportunity.
-- [Curses](https://github.com/piotrmurach/strings) library.
-- [Strings](https://github.com/ruby/curses) library.
+- Thanks Microverse for the opportunity.
+- [Curses](https://github.com/ruby/curses) library.
+- [Strings](https://github.com/piotrmurach/strings) library.
 
 ## 📝 License
 

@@ -93,6 +93,13 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         @window.addstr("\n\nPlayer #{player}'s turn\n")
       end
 
+      def winner_message(player)
+        Curses.curs_set(0) # Hide The Cursor
+
+        @window.setpos(16, 0)
+        @window << "Player #{player} has won the game."
+      end
+
       def game_loop
         loop do
           yield # Assuming Block Givin

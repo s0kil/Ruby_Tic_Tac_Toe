@@ -48,6 +48,8 @@ module TicTacToe
       end
 
       def new_game
+        @window.setpos(0, 0)
+
         welcome_message =
           %(Welcome to Ruby Tic Tac Toe
 Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid.

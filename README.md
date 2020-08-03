@@ -1,16 +1,17 @@
 # Ruby - Tic Tac Toe
 
-> In this project, it was build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.
+In this project, it was build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.
 
 # Instructions
 
-> In order to win the game, a player must place three of their marks in a horizontal, vertical, or diagonal row.
+In order to win the game, a player must place three of their marks in a horizontal, vertical, or diagonal row.
 
-> The following example game is won by the first player, X:
+The following example game is won by the first player, X:
 
-# add the gif with the gameplay here.
+<iframe src="http://showterm.io/41ecc206e0b5daa9527ef" width="640" height="480"></iframe>
 
-> To exit the game, just press CTRL+C
+To exit the game, just press CTRL+C
+
 ## Built With
 
 - Ruby.

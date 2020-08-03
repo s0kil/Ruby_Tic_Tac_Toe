@@ -11,7 +11,6 @@ module TicTacToe
     interface = TicTacToe::Interface::TextualInterface.new(@game_board, @player_selection)
   )
     game_characters = %w[X O].freeze
-
     winner = false
 
     interface.game_loop do

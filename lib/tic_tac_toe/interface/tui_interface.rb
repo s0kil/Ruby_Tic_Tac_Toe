@@ -103,7 +103,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       def game_loop
         loop do
           yield # Assuming Block Givin
-          # @window.refresh
+          @window.refresh
 
           # Slow Down Event Loop,
           # So Our Program Is Not CPU Intensive

@@ -111,6 +111,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       rescue Interrupt => _e
         # Handling Ctrl+C, No Operation
         # Continue With Default Of Exiting The Program
+        exit
       ensure
         # Close Screen Overlay After Game Loop Exits
         Curses.close_screen

@@ -103,7 +103,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       def game_loop
         loop do
           yield # Assuming Block Givin
-          @window.refresh
+          # @window.refresh
 
           # Slow Down Event Loop,
           # So Our Program Is Not CPU Intensive
@@ -128,7 +128,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         @cursor_coordinates[:x] = 0 if @cursor_coordinates[:x] <= 0 # Left
         @cursor_coordinates[:x] = 8 if @cursor_coordinates[:x] >= 8 # Right
 
-        # We Are Restoring Cursor Position Set On The Previous Game Loop Cycle
+        # Restoring Cursor Position Set On The Previous Game Loop Cycle
         @window.setpos(
           @cursor_coordinates[:y],
           @cursor_coordinates[:x]
@@ -145,12 +145,16 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         case key_press
         when Curses::Key::UP
           @cursor_coordinates[:y] = @cursor_coordinates[:y] - row_cursor_gap
+
         when Curses::Key::DOWN
           @cursor_coordinates[:y] = @cursor_coordinates[:y] + row_cursor_gap
+
         when Curses::Key::LEFT
           @cursor_coordinates[:x] = @cursor_coordinates[:x] - column_cursor_gap
+
         when Curses::Key::RIGHT
           @cursor_coordinates[:x] = @cursor_coordinates[:x] + column_cursor_gap
+
         when ' ' # Space Bar, https://stackoverflow.com/a/13434381
           # Simple Solution To Convert Row And Column Coordinates To Game Board Matrix Indices
           # WARNING: Will Break If Game Board Position Changes
@@ -189,6 +193,13 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
           @player_selection.row = row
           @player_selection.column = column
+
+        when Curses::Key::RESIZE # Handle Terminal Resized
+          @window.clear
+          @window.resize(@window.maxy, @window.maxx)
+
+          # TODO: Find A Better Way To Handle Welcome Message And Instructions From Disappearing
+          new_game
         end
       end
     end

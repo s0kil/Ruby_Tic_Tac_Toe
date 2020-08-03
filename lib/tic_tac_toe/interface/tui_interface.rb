@@ -196,8 +196,8 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
           @player_selection.row = row
           @player_selection.column = column
 
-        when Curses::Key::RESIZE # Handle Terminal Resized
-          @window.clear # Clear The Window, https://stackoverflow.com/a/21815615
+        when Curses::Key::RESIZE # Handle Terminal Resize Event, https://stackoverflow.com/a/21815615
+          @window.clear # Clear The Window
           @window.resize(@window.maxy, @window.maxx)
         end
       end

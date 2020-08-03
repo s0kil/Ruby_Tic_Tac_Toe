@@ -1,28 +1,47 @@
-require_relative 'tic_tac_toe/interface.rb'
+require_relative 'tic_tac_toe/interface/tui_interface.rb'
 require_relative 'tic_tac_toe/game.rb'
 
 module TicTacToe
   @game_board = Matrix.build(3, 3) { |_row, _col| '-' }.to_a
+  @player_selection = Struct.new(:column, :row).new
+  @current_player = ''
 
   def self.start_game(
-    game = TicTacToe::Game.new(@game_board),
-    interface = TicTacToe::Interface.new(@game_board)
+    game = TicTacToe::Game.new(@game_board, @player_selection),
+    interface = TicTacToe::Interface::TextualInterface.new(@game_board, @player_selection)
   )
-    players = %w[X O].freeze
+    game_characters = %w[X O].freeze
 
-    puts interface.new_game
+    interface.new_game
+    interface.game_loop do
+      # If New Game, Set Current Player To Random Game Character
+      @current_player = game_characters.sample if @current_player.empty?
 
-    # TODO: Game Logic To Check For Winner
-    winner = false
+      # Update Game Board Item And Switch Player,
+      # If Player Selected An Item,
+      # And The Item Is Available
+      if @player_selection.row &&
+         @player_selection.column &&
+         @current_player.empty? == false &&
+         game.player_selection_available? == true
 
-    # Infinite Loop Until We Have A Winner
-    until winner
-      players.map do |player|
-        interface.draw_board
-        puts "\nPlayer #{player}, Select Your Move!"
-        player_selection = interface.select_option(player)
-        game.update_board(player_selection, player)
+        game.update_board(@current_player)
+
+        # Switch Players
+        new_player =
+          game_characters.reject { |game_character| game_character == @current_player }.first
+
+        @current_player = new_player
+
+        # Reset Player Selection
+        @player_selection.row = nil
+        @player_selection.column = nil
       end
+
+      interface.draw_board(@current_player)
+      interface.handle_key_press
+
+      # TODO: Game Logic To Check For Winner
     end
   end
 end

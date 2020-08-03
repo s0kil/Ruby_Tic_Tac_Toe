@@ -2,10 +2,9 @@ require 'matrix'
 
 module TicTacToe
   class Game
-    attr_accessor :board
-
-    def initialize(board)
-      @board = board
+    def initialize(game_board, player_selection)
+      @game_board = game_board
+      @player_selection = player_selection
     end
 
     def winner
@@ -54,8 +53,12 @@ module TicTacToe
       game_matrix.transpose.select { |item| item.uniq.count == 1 }
     end
 
-    def update_board(selection, player)
-      board[selection.row][selection.column] = player
+    def update_board(player)
+      @game_board[@player_selection.row][@player_selection.column] = player
+    end
+
+    def player_selection_available?
+      @game_board[@player_selection.row][@player_selection.column] == '-'
     end
   end
 end

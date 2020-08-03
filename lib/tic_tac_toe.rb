@@ -12,11 +12,11 @@ module TicTacToe
   )
     game_characters = %w[X O].freeze
 
-    interface.new_game
-
     winner = false
 
     interface.game_loop do
+      interface.new_game
+
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
 

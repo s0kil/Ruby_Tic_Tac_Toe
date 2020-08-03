@@ -195,11 +195,8 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
           @player_selection.column = column
 
         when Curses::Key::RESIZE # Handle Terminal Resized
-          @window.clear
+          @window.clear # Clear The Window
           @window.resize(@window.maxy, @window.maxx)
-
-          # TODO: Find A Better Way To Handle Welcome Message And Instructions From Disappearing
-          new_game
         end
       end
     end

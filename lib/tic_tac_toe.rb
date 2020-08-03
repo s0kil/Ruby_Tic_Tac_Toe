@@ -33,6 +33,10 @@ module TicTacToe
           winner = true
           interface.draw_board(@current_player) # We Draw The Last Player Move
           interface.winner_message(@current_player)
+        elsif game.players_draw?
+          winner = true
+          interface.draw_board(@current_player) # We Draw The Last Player Move
+          interface.players_draw_message
         end
 
         # Switch Players

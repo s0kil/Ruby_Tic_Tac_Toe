@@ -58,6 +58,10 @@ module TicTacToe
       [maybe_diagonal, maybe_diagonal_reverse, maybe_horizontal, maybe_vertical].map(&is_valid_array).any?(true)
     end
 
+    def players_draw?
+      @game_board.flatten.none?('-')
+    end
+
     def update_board(player)
       @game_board[@player_selection.row][@player_selection.column] = player
     end

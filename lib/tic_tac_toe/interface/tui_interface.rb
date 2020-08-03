@@ -114,9 +114,6 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       ensure
         # Close Screen Overlay After Game Loop Exits
         Curses.close_screen
-
-        # Exit Message
-        puts 'Thanks for playing Tic Tac Toe, Goodbye!'
       end
 
       def handle_key_press

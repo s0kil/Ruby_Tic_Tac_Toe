@@ -13,6 +13,8 @@ module TicTacToe
     game_characters = %w[X O].freeze
 
     interface.new_game
+    winner = false
+    
     interface.game_loop do
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
@@ -21,12 +23,14 @@ module TicTacToe
       # If Player Selected An Item,
       # And The Item Is Available
       if @player_selection.row &&
-         @player_selection.column &&
-         @current_player.empty? == false &&
-         game.player_selection_available? == true
+        @player_selection.column &&
+        @current_player.empty? == false &&
+        game.player_selection_available? == true
 
         game.update_board(@current_player)
-
+        p game.winner?
+          
+        
         # Switch Players
         new_player =
           game_characters.reject { |game_character| game_character == @current_player }.first

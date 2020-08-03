@@ -7,23 +7,23 @@ module TicTacToe
       @player_selection = player_selection
     end
 
-    def winner
+    def winner?
       # Diagonally, Starting From [First Row][First Item]
       # [0 _ _]
       # [_ 0 _]
       # [_ _ 0]
-      Matrix.rows(
-        game_matrix
-      ).each(:diagonal).to_a
-
+      maybe_diagonal = Matrix.rows(
+        @game_board
+      ).each(:diagonal).to_a.uniq.count == 1
+     
       # Diagonally, Starting From [First Row][Last Item]
       # [_ _ 0]
       # [_ 0 _]
       # [0 _ _]
-      Matrix.rows(
-        game_matrix.map(&:reverse)
-      ).each(:diagonal).to_a
-
+      maybe_diagonal_reverse = Matrix.rows(
+        @game_board.map(&:reverse)
+      ).each(:diagonal).to_a.select { |item| item.uniq.count == 1 && item.none?('-') }.size >= 1
+      
       # Horizontally, All Items Are The Same
       # [0 0 0]
       # [_ _ _]
@@ -36,8 +36,8 @@ module TicTacToe
       # [_ _ _]
       # [_ _ _]
       # [0 0 0]
-      game_matrix.select { |item| item.uniq.count == 1 }
-
+      maybe_horizontal = @game_board.select { |item| item.uniq.count == 1 && item.none?('-') }.size >= 1
+  
       # Vertically, All Items Are The Same
       # [0 _ _]
       # [0 _ _]
@@ -50,7 +50,15 @@ module TicTacToe
       # [_ _ 0]
       # [_ _ 0]
       # [_ _ 0]
-      game_matrix.transpose.select { |item| item.uniq.count == 1 }
+      maybe_vertical = @game_board.transpose.select { |item| item.uniq.count == 1 && item.none?('-')}.size >= 1 
+     
+      result = [maybe_diagonal, maybe_diagonal_reverse, maybe_horizontal, maybe_vertical ]
+    
+      if maybe_diagonal || maybe_diagonal_reverse || maybe_horizontal ||  maybe_vertical
+        true
+      else
+        false
+      end
     end
 
     def update_board(player)

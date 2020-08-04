@@ -1,41 +1,56 @@
 [![Run on Repl.it](https://repl.it/badge/github/danielsokil/Ruby_Tic_Tac_Toe)](https://repl.it/github/danielsokil/Ruby_Tic_Tac_Toe)
 
-# RubyTicTacToe
+# Ruby - Tic Tac Toe
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/Ruby_Tic_Tac_Toe`. To experiment with that code, run `bin/console` for an interactive prompt.
+In this project, it was build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.
 
-TODO: Delete this and the text above, and describe your gem
+## Instructions
 
-## Installation
+In order to win the game, a player must place three of their marks in a horizontal, vertical, or diagonal row.
 
-Add this line to your application's Gemfile:
+The following example game is won by the first player, X:
 
-```ruby
-gem 'Ruby_Tic_Tac_Toe'
-```
+![gif](demo-gif.gif)
 
-And then execute:
+To exit the game, just press CTRL+C
 
-    $ bundle install
+## Built With
 
-Or install it yourself as:
+- Ruby.
 
-    $ gem install Ruby_Tic_Tac_Toe
+## Live Demo
 
-## Usage
+[Live Demo Link](https://repl.it/@danielsokil/RubyTicTacToe-2#README.md)
 
-TODO: Write usage instructions here
+## Authors
 
-## Development
+👤 **Daniel Sokil**
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+- [@Github](https://github.com/s0kil?)
+- [Linkedin](https://linkedin.com/in/daniel-sokil/)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+👤 **Carlos Veiga**
 
-## Contributing
+- [Github](https://github.com/wrakc)
+- [Twitter](https://twitter.com/carlosveig)
+- [Linkedin](https://linkedin.com/chveiga)
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/Ruby_Tic_Tac_Toe.
+## 🤝 Contributing
 
-## License
+Contributions, issues and feature requests are welcome!
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Feel free to check the [issues page](issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Thanks Microverse for the opportunity.
+- [Curses](https://github.com/ruby/curses) library.
+- [Strings](https://github.com/piotrmurach/strings) library.
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.

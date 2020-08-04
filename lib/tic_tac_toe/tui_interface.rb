@@ -84,18 +84,18 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
     end
 
     def winner_message(player)
-      Curses.curs_set(0) # Hide The Cursor
-
       @window.setpos(16, 0)
       @window << "Player #{player} has won the game."
     end
 
     def players_draw_message
-      Curses.curs_set(0) # Hide The Cursor
-
       @window.setpos(16, 0)
       @window.clrtoeol # Clear The Line From Previous Message, https://stackoverflow.com/a/5072915
       @window << "It's a draw!"
+    end
+
+    def end_game
+      Curses.curs_set(0) # Hide The Cursor
     end
 
     def game_loop

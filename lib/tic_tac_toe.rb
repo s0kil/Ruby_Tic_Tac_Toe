@@ -1,4 +1,4 @@
-require_relative 'tic_tac_toe/interface/tui_interface.rb'
+require_relative 'tic_tac_toe/tui_interface.rb'
 require_relative 'tic_tac_toe/game.rb'
 
 module TicTacToe
@@ -8,7 +8,7 @@ module TicTacToe
 
   def self.start_game(
     game = TicTacToe::Game.new(@game_board, @player_selection),
-    interface = TicTacToe::Interface::TextualInterface.new(@game_board, @player_selection)
+    interface = TicTacToe::TextualInterface.new(@game_board, @player_selection)
   )
     game_characters = %w[X O].freeze
     winner = false

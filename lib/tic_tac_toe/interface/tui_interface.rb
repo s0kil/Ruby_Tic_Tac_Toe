@@ -138,17 +138,17 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         row_cursor_gap = 2
         column_cursor_gap = 4
 
-        case key_press
-        when Curses::Key::UP
+        case key_press # The Numbers (6061*) Represent Window Navigation Key Events
+        when Curses::Key::UP, 60_610
           @cursor_coordinates[:y] = @cursor_coordinates[:y] - row_cursor_gap
 
-        when Curses::Key::DOWN
+        when Curses::Key::DOWN, 60_616
           @cursor_coordinates[:y] = @cursor_coordinates[:y] + row_cursor_gap
 
-        when Curses::Key::LEFT
+        when Curses::Key::LEFT, 60_612
           @cursor_coordinates[:x] = @cursor_coordinates[:x] - column_cursor_gap
 
-        when Curses::Key::RIGHT
+        when Curses::Key::RIGHT, 60_614
           @cursor_coordinates[:x] = @cursor_coordinates[:x] + column_cursor_gap
 
         when ' ' # Space Bar, https://stackoverflow.com/a/13434381

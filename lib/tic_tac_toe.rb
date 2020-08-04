@@ -19,6 +19,8 @@ module TicTacToe
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
 
+      interface.players_turn_message(@current_player) unless winner
+
       # Update Game Board Item And Switch Player,
       # If Player Selected An Item,
       # And The Item Is Available
@@ -31,12 +33,10 @@ module TicTacToe
 
         if game.winner?
           winner = true
-          interface.draw_board(@current_player) # We Draw The Last Player Move
           interface.winner_message(@current_player)
           interface.end_game
         elsif game.players_draw?
           winner = true
-          interface.draw_board(@current_player) # We Draw The Last Player Move
           interface.players_draw_message
           interface.end_game
         end
@@ -52,7 +52,7 @@ module TicTacToe
         @player_selection.column = nil
       end
 
-      interface.draw_board(@current_player) unless winner
+      interface.draw_board
       interface.handle_key_press
     end
   end

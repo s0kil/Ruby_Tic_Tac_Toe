@@ -54,7 +54,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       @window.setpos(0, 0)
     end
 
-    def draw_board(player)
+    def draw_board
       @window.setpos(10, 0)
 
       # Replace The Default Character `-` With A Colored Space Placeholder
@@ -79,19 +79,22 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         # Add Row Separator, Unless Last Row
         @window.addstr("\n---------\n") unless row_index == (@game_board.length - 1)
       end
+    end
 
-      @window.addstr("\n\nPlayer #{player}'s turn\n")
+    def players_turn_message(player)
+      @window.setpos(16, 0)
+      @window.addstr("Player #{player}'s turn")
     end
 
     def winner_message(player)
       @window.setpos(16, 0)
-      @window << "Player #{player} has won the game."
+      @window.addstr("Player #{player} has won the game.")
     end
 
     def players_draw_message
       @window.setpos(16, 0)
       @window.clrtoeol # Clear The Line From Previous Message, https://stackoverflow.com/a/5072915
-      @window << "It's a draw!"
+      @window.addstr("It's a draw!")
     end
 
     def end_game

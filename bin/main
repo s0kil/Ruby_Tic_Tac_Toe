@@ -2,19 +2,9 @@
 
 require_relative '../lib/tic_tac_toe'
 
-# puts 'Select the row and item index to change'
-# puts 'Example: 1.2, first row, second item'
-# print ':'
-# row_item = gets.chomp
-
-# puts "Do you want #{row_item} to be X or O?"
-# row_item_value = gets.chomp
-
-# puts "Changing #{row_item} to #{row_item_value}"
-
-## Show the updated board and ask for the next move.
-## We will make a method to check if there is any winner condition in a while loop until player X or O wins.
-## A method to display who was the winner.
-## Ask the players if they want to play the game again.
-
-TicTacToe.start_game
+begin
+  TicTacToe.start_game
+ensure
+  # Exit Message
+  puts 'Thanks for playing Tic Tac Toe, Goodbye!'
+end

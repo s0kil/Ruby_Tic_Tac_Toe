@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/danielsokil/Ruby_Tic_Tac_Toe)](https://repl.it/github/danielsokil/Ruby_Tic_Tac_Toe)
+
 # Ruby - Tic Tac Toe
 
 In this project, it was build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.

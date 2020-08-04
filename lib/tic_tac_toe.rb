@@ -1,4 +1,4 @@
-require_relative 'tic_tac_toe/interface/tui_interface.rb'
+require_relative 'tic_tac_toe/tui_interface.rb'
 require_relative 'tic_tac_toe/game.rb'
 
 module TicTacToe
@@ -8,15 +8,14 @@ module TicTacToe
 
   def self.start_game(
     game = TicTacToe::Game.new(@game_board, @player_selection),
-    interface = TicTacToe::Interface::TextualInterface.new(@game_board, @player_selection)
+    interface = TicTacToe::TextualInterface.new(@game_board, @player_selection)
   )
     game_characters = %w[X O].freeze
-
-    interface.new_game
-
     winner = false
 
     interface.game_loop do
+      interface.new_game
+
       # If New Game, Set Current Player To Random Game Character
       @current_player = game_characters.sample if @current_player.empty?
 
@@ -34,6 +33,12 @@ module TicTacToe
           winner = true
           interface.draw_board(@current_player) # We Draw The Last Player Move
           interface.winner_message(@current_player)
+          interface.end_game
+        elsif game.players_draw?
+          winner = true
+          interface.draw_board(@current_player) # We Draw The Last Player Move
+          interface.players_draw_message
+          interface.end_game
         end
 
         # Switch Players
@@ -47,10 +52,8 @@ module TicTacToe
         @player_selection.column = nil
       end
 
-      unless winner
-        interface.draw_board(@current_player)
-        interface.handle_key_press
-      end
+      interface.draw_board(@current_player) unless winner
+      interface.handle_key_press
     end
   end
 end

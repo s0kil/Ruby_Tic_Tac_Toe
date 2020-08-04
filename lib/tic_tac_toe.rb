@@ -50,10 +50,8 @@ module TicTacToe
         @player_selection.column = nil
       end
 
-      unless winner
-        interface.draw_board(@current_player)
-        interface.handle_key_press
-      end
+      interface.draw_board(@current_player) unless winner
+      interface.handle_key_press
     end
   end
 end

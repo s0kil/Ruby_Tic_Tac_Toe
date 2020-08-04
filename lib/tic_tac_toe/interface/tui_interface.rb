@@ -111,7 +111,6 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
       rescue Interrupt => _e
         # Handling Ctrl+C, No Operation
         # Continue With Default Of Exiting The Program
-        exit
       ensure
         # Close Screen Overlay After Game Loop Exits
         Curses.close_screen
@@ -194,6 +193,9 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
         when Curses::Key::RESIZE # Handle Terminal Resize Event, https://stackoverflow.com/a/21815615
           @window.clear # Clear The Window
           @window.resize(@window.maxy, @window.maxx)
+
+        when 3 # Windows Terminal Exit Signal, https://stackoverflow.com/a/21123827
+          exit
         end
       end
     end

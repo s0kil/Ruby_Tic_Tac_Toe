@@ -191,6 +191,9 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
           @player_selection.column = column
 
         when Curses::Key::RESIZE # Handle Terminal Resize Event, https://stackoverflow.com/a/21815615
+          # TODO: Fix Resizing On Windows OS
+          throw 'Resizing Is Not Supported On Windows OS' if Gem.win_platform?
+
           @window.clear # Clear The Window
           @window.resize(@window.maxy, @window.maxx)
 

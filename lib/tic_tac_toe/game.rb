@@ -67,7 +67,10 @@ module TicTacToe
     end
 
     def player_selection_available?
-      @game_board[@player_selection.row][@player_selection.column] == '-'
+      row = @player_selection.row
+      column = @player_selection.column
+
+      row.nil? == false && column.nil? == false && @game_board[row][column] == '-'
     end
   end
 end

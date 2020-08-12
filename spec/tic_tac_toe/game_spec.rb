@@ -128,4 +128,26 @@ describe 'TicTacToe::Game' do
       expect(game_board[2][2]).to(eq('X'))
     end
   end
+
+  describe '#player_selection_available?' do
+    it 'When New Board Move, Returns True' do
+      player_selection.row = 0
+      player_selection.column = 0
+
+      expect(game.player_selection_available?).to(eq(true))
+    end
+
+    it 'When Board Move Taken, Returns False' do
+      # First Move
+      player_selection.row = 0
+      player_selection.column = 0
+      game.update_board('X')
+
+      # Second Move
+      player_selection.row = 0
+      player_selection.column = 0
+
+      expect(game.player_selection_available?).to(eq(false))
+    end
+  end
 end

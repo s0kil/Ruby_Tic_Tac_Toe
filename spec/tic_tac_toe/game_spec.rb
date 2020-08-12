@@ -118,4 +118,14 @@ describe 'TicTacToe::Game' do
       expect(game.players_draw?).to(eq(true))
     end
   end
+
+  describe '#update_board' do
+    it 'Updates The Board With Player Selection' do
+      player_selection.row = 2
+      player_selection.column = 2
+      game.update_board('X')
+
+      expect(game_board[2][2]).to(eq('X'))
+    end
+  end
 end

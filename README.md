@@ -14,6 +14,11 @@ The following example game is won by the first player, X:
 
 To exit the game, just press CTRL+C
 
+## Run Tests
+
+- `bundle install`
+- `rspec`
+
 ## Built With
 
 - Ruby.

@@ -69,6 +69,38 @@ describe 'TicTacToe::Game' do
 
       expect(game.winner?).to(eq(true))
     end
+
+    it 'Does Not Find A Winner Vertically' do
+      player_selection.row = 0
+      player_selection.column = 0
+      game.update_board('X')
+
+      player_selection.row = 1
+      player_selection.column = 0
+      game.update_board('X')
+
+      player_selection.row = 2
+      player_selection.column = 0
+      game.update_board('O')
+
+      expect(game.winner?).to(eq(false))
+    end
+
+    it 'Does Not Find A Winner Horizontally' do
+      player_selection.row = 1
+      player_selection.column = 0
+      game.update_board('X')
+
+      player_selection.row = 1
+      player_selection.column = 1
+      game.update_board('X')
+
+      player_selection.row = 1
+      player_selection.column = 2
+      game.update_board('O')
+
+      expect(game.winner?).to(eq(false))
+    end
   end
 
   describe '#players_draw?' do
@@ -116,6 +148,18 @@ describe 'TicTacToe::Game' do
       game.update_board('O')
 
       expect(game.players_draw?).to(eq(true))
+    end
+
+    it 'Returns False If Game Board Empty' do
+      expect(game.players_draw?).to(eq(false))
+    end
+
+    it 'Returns False If Game Board Is Not Full Capacity' do
+      player_selection.row = 0
+      player_selection.column = 0
+      game.update_board('X')
+
+      expect(game.players_draw?).to(eq(false))
     end
   end
 

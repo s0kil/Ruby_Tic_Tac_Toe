@@ -10,13 +10,7 @@ def scaffold_game(matrix_string = nil)
                    .split(/\n/)
                    .map(&:strip)
                    .reject(&:empty?)
-                   .map do |row|
-                   row.split(' ').map do |char|
-                     char.tr!('[]', '')
-                     char.tr!('_', '-')
-                     char
-                   end
-                 end
+                   .map { |row| row.split(' ').map { |char| char.tr('[]', '').tr('_', '-') } }
                end
 
   player_selection = Struct.new(:column, :row).new

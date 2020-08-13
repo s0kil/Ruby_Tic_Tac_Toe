@@ -1,103 +1,100 @@
 require_relative '../../lib/tic_tac_toe/game.rb'
 
-describe 'TicTacToe::Game' do
-  let(:player_selection) { Struct.new(:column, :row).new }
-  let(:game_board) { Matrix.build(3, 3) { |_row, _col| '-' }.to_a }
-  let(:game) { TicTacToe::Game.new(game_board, player_selection) }
+# Test Helper To Create Game Scenarios
+def scaffold_game(matrix_string = nil)
+  game_board = if matrix_string.nil?
+                 Matrix.build(3, 3) { |_row, _col| '-' }.to_a
+               else
+                 # Transform Visual String Matrix Into An Matrix
+                 matrix_string
+                   .split(/\n/)
+                   .map(&:strip)
+                   .reject(&:empty?)
+                   .map do |row|
+                   row.split(' ').map do |char|
+                     char.tr!('[]', '')
+                     char.tr!('_', '-')
+                     char
+                   end
+                 end
+               end
 
+  player_selection = Struct.new(:column, :row).new
+  game = TicTacToe::Game.new(game_board, player_selection)
+
+  [game, game_board, player_selection]
+end
+
+describe 'TicTacToe::Game' do
   describe '#winner?' do
     it 'Checks For Winner Diagonally' do
-      player_selection.row = 0
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 1
-      game.update_board('X')
-
-      player_selection.row = 2
-      player_selection.column = 2
-      game.update_board('X')
+      game, = scaffold_game(
+        %(
+          [X _ _]
+          [_ X _]
+          [_ _ X]
+        )
+      )
 
       expect(game.winner?).to(eq(true))
     end
 
     it 'Checks For Winner Diagonally Reversed' do
-      player_selection.row = 2
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 1
-      game.update_board('X')
-
-      player_selection.row = 0
-      player_selection.column = 2
-      game.update_board('X')
+      game, = scaffold_game(
+        %(
+          [_ _ X]
+          [_ X _]
+          [X _ _]
+        )
+      )
 
       expect(game.winner?).to(eq(true))
     end
 
     it 'Checks For Winner Horizontally' do
-      player_selection.row = 0
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 0
-      player_selection.column = 1
-      game.update_board('X')
-
-      player_selection.row = 0
-      player_selection.column = 2
-      game.update_board('X')
+      game, = scaffold_game(
+        %(
+          [X X X]
+          [_ _ _]
+          [_ _ _]
+        )
+      )
 
       expect(game.winner?).to(eq(true))
     end
 
     it 'Checks For Winner Vertically' do
-      player_selection.row = 0
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 2
-      player_selection.column = 0
-      game.update_board('X')
+      game, = scaffold_game(
+        %(
+          [X _ _]
+          [X _ _]
+          [X _ _]
+        )
+      )
 
       expect(game.winner?).to(eq(true))
     end
 
     it 'Does Not Find A Winner Vertically' do
-      player_selection.row = 0
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 2
-      player_selection.column = 0
-      game.update_board('O')
+      game, = scaffold_game(
+        %(
+          [X _ _]
+          [X _ _]
+          [O _ _]
+        )
+      )
 
       expect(game.winner?).to(eq(false))
     end
 
     it 'Does Not Find A Winner Horizontally' do
-      player_selection.row = 1
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 1
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 2
-      game.update_board('O')
+      game, = scaffold_game(
+        %(
+          [_ _ _]
+          [X X O]
+          [_ _ _]
+        )
+      )
 
       expect(game.winner?).to(eq(false))
     end
@@ -105,59 +102,37 @@ describe 'TicTacToe::Game' do
 
   describe '#players_draw?' do
     it 'Both Players Draw' do
-      # X | O | X
-      # ---------
-      # O | X | X
-      # ---------
-      # O | X | O
-
-      player_selection.row = 0
-      player_selection.column = 0
-      game.update_board('X')
-
-      player_selection.row = 0
-      player_selection.column = 2
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 1
-      game.update_board('X')
-
-      player_selection.row = 1
-      player_selection.column = 2
-      game.update_board('X')
-
-      player_selection.row = 2
-      player_selection.column = 1
-      game.update_board('X')
-
-      player_selection.row = 0
-      player_selection.column = 1
-      game.update_board('O')
-
-      player_selection.row = 1
-      player_selection.column = 0
-      game.update_board('O')
-
-      player_selection.row = 2
-      player_selection.column = 0
-      game.update_board('O')
-
-      player_selection.row = 2
-      player_selection.column = 2
-      game.update_board('O')
+      game, = scaffold_game(
+        %(
+          [X O X]
+          [O X X]
+          [O X O]
+        )
+      )
 
       expect(game.players_draw?).to(eq(true))
     end
 
     it 'Returns False If Game Board Empty' do
+      game, = scaffold_game(
+        %(
+          [_ _ _]
+          [_ _ _]
+          [_ _ _]
+        )
+      )
+
       expect(game.players_draw?).to(eq(false))
     end
 
     it 'Returns False If Game Board Is Not Full Capacity' do
-      player_selection.row = 0
-      player_selection.column = 0
-      game.update_board('X')
+      game, = scaffold_game(
+        %(
+          [X _ _]
+          [_ _ _]
+          [_ _ _]
+        )
+      )
 
       expect(game.players_draw?).to(eq(false))
     end
@@ -165,6 +140,8 @@ describe 'TicTacToe::Game' do
 
   describe '#update_board' do
     it 'Updates The Board With Player Selection' do
+      game, game_board, player_selection = scaffold_game
+
       player_selection.row = 2
       player_selection.column = 2
       game.update_board('X')
@@ -175,6 +152,8 @@ describe 'TicTacToe::Game' do
 
   describe '#player_selection_available?' do
     it 'When New Board Move, Returns True' do
+      game, _, player_selection = scaffold_game
+
       player_selection.row = 0
       player_selection.column = 0
 
@@ -182,6 +161,8 @@ describe 'TicTacToe::Game' do
     end
 
     it 'When Board Move Taken, Returns False' do
+      game, _, player_selection = scaffold_game
+
       # First Move
       player_selection.row = 0
       player_selection.column = 0

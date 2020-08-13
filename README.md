@@ -4,6 +4,10 @@
 
 In this project, it was build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.
 
+## Installation
+
+- [Ubuntu/Debian Distribution: `sudo apt install libncurses5-dev libncursesw5-dev`](https://github.com/ruby/curses#install)
+
 ## Instructions
 
 In order to win the game, a player must place three of their marks in a horizontal, vertical, or diagonal row.

@@ -22,9 +22,7 @@ module TicTacToe
       # Update Game Board Item And Switch Player,
       # If Player Selected An Item,
       # And The Item Is Available
-      if @player_selection.row &&
-         @player_selection.column &&
-         @current_player.empty? == false &&
+      if @current_player.empty? == false &&
          game.player_selection_available? == true
 
         game.update_board(@current_player)

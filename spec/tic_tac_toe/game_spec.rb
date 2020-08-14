@@ -108,13 +108,7 @@ describe 'TicTacToe::Game' do
     end
 
     it 'Returns False If Game Board Empty' do
-      game, = scaffold_game(
-        %(
-          [_ _ _]
-          [_ _ _]
-          [_ _ _]
-        )
-      )
+      game, = scaffold_game
 
       expect(game.players_draw?).to(eq(false))
     end
